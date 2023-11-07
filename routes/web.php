@@ -17,7 +17,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('trade');
+    return view('welcome');
 });
 
 Route::get('/dashboard', [UserController::class, 'loadDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
