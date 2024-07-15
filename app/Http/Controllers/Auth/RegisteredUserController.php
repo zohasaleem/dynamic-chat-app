@@ -36,27 +36,21 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // $imageName = '';
+        $imageName = '';
         if($request->image){
-            // $imageName = time().'.'.$request->image->extension();
+            $imageName = time().'.'.$request->image->extension();
 
-            // $request->image->move(public_path('images'), $imageName);
-            // $imageName = 'images/'.$imageName;
+            $request->image->move(public_path('images'), $imageName);
+            $imageName = 'images/'.$imageName;
         }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'image' => $imageName
+            'image' => $imageName
         ]);
 
-        $user->addMediaFromRequest('image')
-        ->usingName('Testimg Media')
-        ->toMediaCollection();
-
-        $user->assignRole('user');
-        
         event(new Registered($user));
 
         Auth::login($user);

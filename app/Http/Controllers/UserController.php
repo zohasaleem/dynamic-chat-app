@@ -8,22 +8,13 @@ use App\Models\Chat;
 use App\Events\MessageEvent;
 use App\Events\MessageDeletedEvent;
 use App\Events\MessageUpdatedEvent;
-use Spatie\Permission\Models\Role;
-
 
 
 class UserController extends Controller
 {
     public function loadDashboard(){
 
-        $users = User::whereNotIn('id', [auth()->user()->id])
-        
-        //dont include users if they  have role as admin
-        ->whereDoesntHave('roles', function ($query) {
-
-            $query->where('name', 'admin');
-        });
-
+        $users = User::whereNotIn('id', [auth()->user()->id]);
         $count = $users->count();
         $users = $users->get();
         // return $users;

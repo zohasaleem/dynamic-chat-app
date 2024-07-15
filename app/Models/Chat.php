@@ -10,5 +10,4 @@ class Chat extends Model
     use HasFactory;
 
     protected $fillable = ['sender_id', 'receiver_id', 'message']; 
-
 }
