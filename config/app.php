@@ -168,6 +168,15 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        // App\Providers\TelescopeServiceProvider::class, for devlopment mode
+        Barryvdh\Snappy\ServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
+        Torann\GeoIP\GeoIPServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class,
+
+            
+
     ])->toArray(),
 
     /*
@@ -183,6 +192,14 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'GeoIP' => Torann\GeoIP\Facades\GeoIP::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
+
+
+
     ])->toArray(),
 
 ];

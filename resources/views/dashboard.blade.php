@@ -15,9 +15,28 @@
         </div>
     </div> -->
 
-
     <div class="container mt-4">
-        <div class="row">
+
+    <!--For  Practicing  -->
+
+        <div class="row mt-5">
+                @can('view user')
+                    <a href="{{ route('dashboard') }}">Manage Users</a>
+                @endcan
+
+                @unless(auth()->user()->can('edit user') || auth()->user()->can('view user') || auth()->user()->can('delete user'))
+                    <div>
+                        <p>Sorry, you don't have permission to edit, view, or delete users.</p>
+                    </div>
+                @endunless
+
+
+        </div>
+
+    <!--For  Practicing  -->
+
+
+        <div class="row mt-5">
 
             @if($count > 0 )
 
@@ -27,17 +46,17 @@
 
                         @foreach($users as $user)
 
-                            @php
-                                if($user->image != '' && $user->image != NULL){
-                                    $image = $user->image;
-                                }
-                                else{
+                           @php
+                               
+                                $image = $user->getFirstMediaUrl();
+                                
+                                if(!$image){
                                     $image = 'images/default.png';
                                 }
                             @endphp
 
                             <div class="list-group-item list-group-item-dark cursor-pointer user-list" data-id="{{ $user->id }}">
-                                <img src="{{ @$image }}" alt="no-image" class="user-image">
+                                <img src="{{ $image }}" alt="no-image" class="user-image">
                                 {{ @$user->name}}
                                 <b><sup id="{{ $user->id }}-status" class="offline-status">Offline</sup></b>
 
